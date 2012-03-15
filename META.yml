@@ -1,0 +1,39 @@
+---
+abstract: 'Provides timeclock.pl, a Emacs/timeclock reporting utility'
+author:
+  - 'SÃ¸ren Lund <soren@lund.org>'
+build_requires:
+  Test::More: 0
+configure_requires:
+  Module::Build: 0.38
+dynamic_config: 1
+generated_by: 'Module::Build version 0.38, CPAN::Meta::Converter version 2.112150'
+license: open_source
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: App-TimeClock
+provides:
+  App::TimeClock:
+    file: lib/App/TimeClock.pm
+    version: 0.01
+  App::TimeClock::ConsolePrinter:
+    file: lib/App/TimeClock/ConsolePrinter.pm
+    version: 0
+  App::TimeClock::CsvPrinter:
+    file: lib/App/TimeClock/CsvPrinter.pm
+    version: 0
+  App::TimeClock::DailyReport:
+    file: lib/App/TimeClock/DailyReport.pm
+    version: 0
+  App::TimeClock::HtmlPrinter:
+    file: lib/App/TimeClock/HtmlPrinter.pm
+    version: 0
+  App::TimeClock::PrinterInterface:
+    file: lib/App/TimeClock/PrinterInterface.pm
+    version: 0
+requires:
+  perl: 5.006
+resources:
+  license: http://www.gnu.org/licenses/old-licenses/gpl-1.0.txt
+version: 0.01
