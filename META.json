@@ -1,5 +1,5 @@
 {
-   "abstract" : "Provides timeclock.pl, a Emacs/timeclock reporting utility",
+   "abstract" : "Provides timeclock.pl, a reporting utility for timeclock, which is a time tracking package for GNU Emacs.",
    "author" : [
       "SÃ¸ren Lund <soren@lund.org>"
    ],
@@ -33,7 +33,7 @@
    "provides" : {
       "App::TimeClock" : {
          "file" : "lib/App/TimeClock.pm",
-         "version" : "0.02"
+         "version" : "0.03"
       },
       "App::TimeClock::ConsolePrinter" : {
          "file" : "lib/App/TimeClock/ConsolePrinter.pm",
@@ -59,8 +59,8 @@
    "release_status" : "stable",
    "resources" : {
       "license" : [
-         "http://opensource.org/licenses/gpl-license.php"
+         "http://www.gnu.org/licenses/gpl-3.0.txt"
       ]
    },
-   "version" : "0.02"
+   "version" : "0.03"
 }
