@@ -3,15 +3,15 @@ require 5.006;
 use ExtUtils::MakeMaker;
 WriteMakefile
 (
-  'NAME' => 'App::TimeClock',
-  'VERSION_FROM' => 'lib/App/TimeClock.pm',
-  'PREREQ_PM' => {
-                   'Test::More' => 0
-                 },
+  'PL_FILES' => {},
   'INSTALLDIRS' => 'site',
+  'NAME' => 'App::TimeClock',
   'EXE_FILES' => [
                    'bin/timeclock.pl'
                  ],
-  'PL_FILES' => {}
+  'VERSION_FROM' => 'lib/App/TimeClock.pm',
+  'PREREQ_PM' => {
+                   'Test::More' => 0
+                 }
 )
 ;
