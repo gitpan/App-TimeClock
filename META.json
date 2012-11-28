@@ -4,9 +4,9 @@
       "SÃ¸ren Lund <soren@lund.org>"
    ],
    "dynamic_config" : 1,
-   "generated_by" : "Module::Build version 0.38, CPAN::Meta::Converter version 2.110440",
+   "generated_by" : "Module::Build version 0.4, CPAN::Meta::Converter version 2.120630",
    "license" : [
-      "gpl_1"
+      "open_source"
    ],
    "meta-spec" : {
       "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
@@ -16,12 +16,12 @@
    "prereqs" : {
       "build" : {
          "requires" : {
-            "Test::More" : 0
+            "Test::More" : "0"
          }
       },
       "configure" : {
          "requires" : {
-            "Module::Build" : "0.38"
+            "Module::Build" : "0.4"
          }
       },
       "runtime" : {
@@ -33,7 +33,7 @@
    "provides" : {
       "App::TimeClock" : {
          "file" : "lib/App/TimeClock.pm",
-         "version" : "0.03"
+         "version" : "0.04"
       },
       "App::TimeClock::ConsolePrinter" : {
          "file" : "lib/App/TimeClock/ConsolePrinter.pm",
@@ -62,5 +62,5 @@
          "http://www.gnu.org/licenses/gpl-3.0.txt"
       ]
    },
-   "version" : "0.03"
+   "version" : "0.04"
 }
