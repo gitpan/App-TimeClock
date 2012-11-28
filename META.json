@@ -33,7 +33,7 @@
    "provides" : {
       "App::TimeClock" : {
          "file" : "lib/App/TimeClock.pm",
-         "version" : "0.04"
+         "version" : "0.05"
       },
       "App::TimeClock::ConsolePrinter" : {
          "file" : "lib/App/TimeClock/ConsolePrinter.pm",
@@ -62,5 +62,5 @@
          "http://www.gnu.org/licenses/gpl-3.0.txt"
       ]
    },
-   "version" : "0.04"
+   "version" : "0.05"
 }
