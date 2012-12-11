@@ -16,7 +16,7 @@ name: App-TimeClock
 provides:
   App::TimeClock:
     file: lib/App/TimeClock.pm
-    version: 0.05
+    version: 0.06
   App::TimeClock::ConsolePrinter:
     file: lib/App/TimeClock/ConsolePrinter.pm
     version: 0
@@ -36,4 +36,4 @@ requires:
   perl: 5.006
 resources:
   license: http://www.gnu.org/licenses/gpl-3.0.txt
-version: 0.05
+version: 0.06
