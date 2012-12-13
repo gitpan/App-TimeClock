@@ -2,7 +2,6 @@ package App::TimeClock::DailyReport;
 
 use POSIX qw(difftime strftime);
 use Time::Local;
-use Time::Piece;
 
 =head1 NAME
 
@@ -75,6 +74,80 @@ Sets the time when the report is executed.
 =cut
 sub _set_report_time { $_[0]->{_report_time} = $_[0]->_timelocal($_[1], $_[2]) }
 
+=item _read_line()
+
+Reads a set of check in and check out lines.
+
+If end of file is reached after reading the check in line, then
+reading of the check out line is skipped.
+
+=cut
+sub _read_lines {
+
+    my ($self, $file) = (@_);
+    my ($iline, $oline) = (undef, undef);
+
+    die "Prematurely end of file." if eof($file);
+
+    chomp($iline = <$file>);
+    die "Expected check in in line $." unless $iline =~ /^i /;
+        
+    if (not eof($file)) {
+        chomp($oline = <$file>);
+        die "Excepted check out in line $." unless $oline =~ /^o /;
+    }
+
+    return ($iline, $oline);
+}
+
+=item _parse_lines()
+
+Parses a set of check in and check out lines.
+
+The lines are split on space and should contain the following four
+fields:
+
+=over
+
+=item state 
+
+is either 'i' - check in or 'o' - check out.
+
+=cut
+
+=item date 
+
+is formatted as YYYY/MM//DD
+
+=cut
+
+=item time
+
+is formatted as HH:MM:SS
+
+=cut
+
+=item project
+
+is then name of the project/task and is only required when checking in.
+
+=cut
+
+=back
+
+=cut
+sub _parse_lines {
+    my ($self, $file) = (@_);
+    my ($iline, $oline) = $self->_read_lines($file);
+
+    my ($idate, $itime, $iproject) = (split(/ /, $iline, 4))[1..3];
+    my ($odate, $otime, $oproject) = (defined $oline) ? (split(/ /, $oline, 4))[1..3] :
+      (strftime("%Y/%m/%d", localtime($self->_get_report_time)),
+       strftime("%H:%M:%S", localtime($self->_get_report_time)), "DANGLING");
+       
+    return ($idate, $itime, $iproject, $odate, $otime, $oproject);
+}
+
 =item execute()
 
 Opens the timelog file starts parsing it, looping over each day and
@@ -84,8 +157,8 @@ calling print_day() for each.
 sub execute {
     my $self = shift;
 
-    open FILE, '<', $self->{timelog} or die "$!\n";
-    binmode FILE, ':utf8';
+    open $file, '<', $self->{timelog} or die "$!\n";
+    binmode $file, ':utf8';
 
     my %projects;
     my ($current_project, $current_date, $work, $work_total);
@@ -97,27 +170,8 @@ sub execute {
 
     $self->{printer}->print_header;
 
-    while (not eof(FILE)) {
-        chomp(my $iline = <FILE>);
-        die "Expected check in in line $." unless $iline =~ /^i /;
-        
-        my $oline = undef;
-        if (not eof(FILE)) {
-            chomp($oline = <FILE>);
-            die "Excepted check out in line $." unless $oline =~ /^o /;
-        }
-
-        # Split the line, it should contain:
-        #
-        # - state is either 'i' - check in or 'o' - check out.
-        # - date is formatted as YYYY/MM//DD
-        # - time is formatted as HH:MM:SS
-        # - project is then name of the project/task and is only required when checking in.
-        #
-        my ($idate, $itime, $iproject) = (split(/ /, $iline, 4))[1..3];
-        my ($odate, $otime, $oproject) = (defined $oline) ? (split(/ /, $oline, 4))[1..3] :
-          (strftime("%Y/%m/%d", localtime($self->_get_report_time)),
-           strftime("%H:%M:%S", localtime($self->_get_report_time)), "DANGLING");
+    while (not eof($file)) {
+        my ($idate, $itime, $iproject, $odate, $otime, $oproject) = $self->_parse_lines($file);
 
         if (!length($current_date)) {
             # First check in, set the current date and start time
@@ -178,16 +232,17 @@ L<timeclock.pl>
 
 Copyright (C) 2012 Søren Lund
 
-This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; version 2 dated June, 1991 or at your option
-any later version.
+This file is part of App::TimeClock.
 
-This program is distributed in the hope that it will be useful,
+App::TimeClock is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+App::TimeClock is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
-A copy of the GNU General Public License is available in the source tree;
-if not, write to the Free Software Foundation, Inc.,
-59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+You should have received a copy of the GNU General Public License
+along with App::TimeClock.  If not, see <http://www.gnu.org/licenses/>.
