@@ -33,7 +33,7 @@
    "provides" : {
       "App::TimeClock" : {
          "file" : "lib/App/TimeClock.pm",
-         "version" : "0.07"
+         "version" : "0.08"
       },
       "App::TimeClock::ConsolePrinter" : {
          "file" : "lib/App/TimeClock/ConsolePrinter.pm",
@@ -58,9 +58,12 @@
    },
    "release_status" : "stable",
    "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/soren/App-TimeClock/issues"
+      },
       "license" : [
          "http://www.gnu.org/licenses/gpl-3.0.txt"
       ]
    },
-   "version" : "0.07"
+   "version" : "0.08"
 }
