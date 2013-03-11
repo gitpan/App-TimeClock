@@ -16,7 +16,7 @@ name: App-TimeClock
 provides:
   App::TimeClock:
     file: lib/App/TimeClock.pm
-    version: 0.08
+    version: 0.09
   App::TimeClock::ConsolePrinter:
     file: lib/App/TimeClock/ConsolePrinter.pm
     version: 0
@@ -37,4 +37,4 @@ requires:
 resources:
   bugtracker: https://github.com/soren/App-TimeClock/issues
   license: http://www.gnu.org/licenses/gpl-3.0.txt
-version: 0.08
+version: 0.09
